@@ -1,0 +1,64 @@
+* Containers
+** Building Images
+To build images use the followin =-t= flag to pass a "tag" to the image. Use =-f= to signify the specific container.
+#+begin_src bash
+$ podman build -t imageName .
+#+end_src
+** Malware Analysis
+*** Fedora
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/malware_analysis/fedora/Containerfile
+FROM fedora-minimal:42
+
+RUN dnf install -y \
+  gdb \
+  strace \
+  ltrace \
+  binwalk \
+  yara \
+  p7zip \
+  emacs-nox
+
+RUN mkdir /home/app
+WORKDIR /home/app
+#+end_src
+*** Debian
+#+begin_src containerfile
+FROM debian:12
+
+RUN apt-get install -y \
+   gdb \
+   strace \
+   ltrace \
+   binwalk \
+   yara \
+   p7zip \
+   emacs-nox\
+
+RUN
+#+end_src
+*** Nix
+** Network Analysis
+** Log Analysis
+** Email Analysis
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
+FROM fedora-minimal:42
+
+RUN dnf install -y \
+  yara \
+  p7zip \
+  file \
+  clamav \
+  clamd \
+  clamav-update \
+  emacs-nox
+
+RUN mkdir /home/samples
+WORKDIR /home/samples
+#+end_src
+** All Tools
+** Using the Containers
+*** ma-fedora
+You run Emacs straight out of the container.
+#+begin_src bash
+podman run --rm -it --name malcont ma-fedora /usr/bin/emacs
+#+end_src
