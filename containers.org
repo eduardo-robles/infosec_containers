@@ -89,7 +89,7 @@ WORKDIR /home/samples
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
-RUN dnf install -y \
+RUN microdnf install -y \
   yara \
   p7zip \
   file \
@@ -99,7 +99,7 @@ RUN dnf install -y \
   emacs-nox \
   --nodocs --setopt install_weak_deps=False
 
-RUN dnf clean all -y
+RUN microdnf clean all -y
 
 RUN mkdir /home/samples
 WORKDIR /home/samples
