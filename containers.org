@@ -93,7 +93,7 @@ RUN microdnf install -y \
   clamav \
   clamd \
   clamav-update \
-  emacs-nox \
+  mg \
   --nodocs --setopt install_weak_deps=False \
   && microdnf clean all -y
 
