@@ -70,7 +70,7 @@ WORKDIR /home/samples
 #+end_src
 ** Log Analysis
 ** DONE Email Analysis
-#+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
+#+begin_src containerfile
 FROM fedora-minimal:42
 
 RUN dnf install -y \
@@ -96,7 +96,8 @@ RUN dnf install -y \
   clamav \
   clamd \
   clamav-update \
-  emacs-nox
+  emacs-nox \
+  dnf clean all -y
 
 RUN mkdir /home/samples
 WORKDIR /home/samples
