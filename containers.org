@@ -96,7 +96,8 @@ RUN dnf install -y \
   clamav \
   clamd \
   clamav-update \
-  emacs-nox
+  emacs-nox \
+  --nodocs --setopt install_weak_deps=False
 
 RUN dnf clean all -y
 
