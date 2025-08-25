@@ -70,7 +70,7 @@ WORKDIR /home/samples
 #+end_src
 ** Log Analysis
 ** DONE Email Analysis
-#+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
+#+begin_src containerfile
 FROM fedora-minimal:42
 
 RUN dnf install -y \
@@ -85,6 +85,23 @@ RUN dnf install -y \
 RUN mkdir /home/samples
 WORKDIR /home/samples
 #+end_src
+** DONE Minimized Email Analysis
+CLOSED: [2025-08-25 Mon 14:45]
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
+FROM fedora-minimal:42
+
+RUN microdnf install -y \
+  clamav \
+  clamd \
+  clamav-update \
+  mg \
+  --nodocs --setopt install_weak_deps=False \
+  && microdnf clean all -y
+
+RUN mkdir /home/samples
+WORKDIR /home/samples
+#+end_src
+*** Using the "scratch" method does not work
 ** All Tools
 ** Using the Containers
 *** ma-fedora
