@@ -73,9 +73,23 @@ WORKDIR /home/samples
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
-RUN microdnf install && microdnf clean all -y \
-  --nodocs \
-  --setopts install_weak_deps=False \
+RUN dnf install -y \
+  yara \
+  p7zip \
+  file \
+  clamav \
+  clamd \
+  clamav-update \
+  emacs-nox
+
+RUN mkdir /home/samples
+WORKDIR /home/samples
+#+end_src
+** TODO Minimized Email Analysis
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
+FROM fedora-minimal:42
+
+RUN dnf install -y \
   yara \
   p7zip \
   file \
