@@ -104,6 +104,7 @@ RUN microdnf clean all -y
 RUN mkdir /home/samples
 WORKDIR /home/samples
 #+end_src
+*** Using the "scratch" method does not work
 ** All Tools
 ** Using the Containers
 *** ma-fedora
