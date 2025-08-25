@@ -1,0 +1,10 @@
+FROM fedora-minimal:42
+
+RUN dnf install -y \
+  tshark \
+  tcpdump \
+  nmap \
+  emacs-nox
+
+RUN mkdir /home/samples
+WORKDIR /home/samples

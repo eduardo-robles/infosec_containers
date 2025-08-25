@@ -4,8 +4,10 @@ To build images use the followin =-t= flag to pass a "tag" to the image. Use =-f
 #+begin_src bash
 $ podman build -t imageName .
 #+end_src
+** Naming images
+*** distro-noun/verb-cont
 ** Malware Analysis
-*** Fedora
+*** DONE Fedora
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/malware_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
@@ -21,7 +23,7 @@ RUN dnf install -y \
 RUN mkdir /home/app
 WORKDIR /home/app
 #+end_src
-*** Debian
+*** TODO Debian
 #+begin_src containerfile
 FROM debian:12
 
@@ -37,9 +39,37 @@ RUN apt-get install -y \
 RUN
 #+end_src
 *** Nix
+*** Tools
+**** gdb
+**** strace
+**** ltrace
+**** binwalk
+**** yara
+**** p7zip
+**** emacs-nox
 ** Network Analysis
+*** Tools
+**** wireshark?
+**** suricata
+**** tshark?
+**** tcpdump
+**** fiddler?
+**** nmap
+*** Fedora
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/network_analysis/fedora/Containerfile
+FROM fedora-minimal:42
+
+RUN dnf install -y \
+  tshark \
+  tcpdump \
+  nmap \
+  emacs-nox
+
+RUN mkdir /home/samples
+WORKDIR /home/samples
+#+end_src
 ** Log Analysis
-** Email Analysis
+** DONE Email Analysis
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
