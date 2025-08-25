@@ -90,16 +90,12 @@ WORKDIR /home/samples
 FROM fedora-minimal:42
 
 RUN microdnf install -y \
-  yara \
-  p7zip \
-  file \
   clamav \
   clamd \
   clamav-update \
   emacs-nox \
-  --nodocs --setopt install_weak_deps=False
-
-RUN microdnf clean all -y
+  --nodocs --setopt install_weak_deps=False \
+  && microdnf clean all -y
 
 RUN mkdir /home/samples
 WORKDIR /home/samples
