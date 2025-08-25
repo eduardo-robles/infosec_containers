@@ -85,7 +85,8 @@ RUN dnf install -y \
 RUN mkdir /home/samples
 WORKDIR /home/samples
 #+end_src
-** TODO Minimized Email Analysis
+** DONE Minimized Email Analysis
+CLOSED: [2025-08-25 Mon 14:45]
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
