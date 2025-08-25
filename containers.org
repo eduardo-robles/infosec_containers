@@ -96,8 +96,9 @@ RUN dnf install -y \
   clamav \
   clamd \
   clamav-update \
-  emacs-nox \
-  dnf clean all -y
+  emacs-nox
+
+RUN dnf clean all -y
 
 RUN mkdir /home/samples
 WORKDIR /home/samples
