@@ -73,7 +73,9 @@ WORKDIR /home/samples
 #+begin_src containerfile :tangle ~/Projects/infosec_containers/email_analysis/fedora/Containerfile
 FROM fedora-minimal:42
 
-RUN dnf install -y \
+RUN microdnf install && microdnf clean all -y \
+  --nodocs \
+  --setopts install_weak_deps=False \
   yara \
   p7zip \
   file \
