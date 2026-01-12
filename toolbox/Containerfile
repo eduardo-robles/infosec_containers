@@ -1,0 +1,22 @@
+# Start from the official Fedora Toolbox Image
+FROM registry.fedoraproject.org/fedora-toolbox:42
+
+# Add Microsoft Powershell Repo
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+    curl -s https://packages.microsoft.com/config/rhel/9/prod.repo | tee /etc/yum.repos.d/microsoft.repo
+
+# Install All Tools
+RUN dnf --assumeyes install \
+    nmap \
+    telnet \
+    wireshark-cli \
+    powershell \
+    nc \
+    bind-utils \
+    yara && \
+    dnf clean all
+
+RUN dnf clean all
+
+# Ensure the image is recognized by Toolbx
+LABEL com.github.containers.toolbox="true"

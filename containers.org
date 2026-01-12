@@ -23,6 +23,17 @@ RUN dnf install -y \
 RUN mkdir /home/app
 WORKDIR /home/app
 #+end_src
+*** TODO Bootc
+#+begin_src containerfile
+FROM quay.io/fedora/fedora-bootc:42 as base
+
+RUN dnf install -y \
+  ...
+  ...
+  ..
+
+RUN
+#+end_src
 *** TODO Debian
 #+begin_src containerfile
 FROM debian:12
@@ -109,3 +120,36 @@ You run Emacs straight out of the container.
 #+begin_src bash
 podman run --rm -it --name malcont ma-fedora /usr/bin/emacs
 #+end_src
+* Toolbox
+** Building Images
+To build a toolbox image you use a very similar process as with a regular podman image container. The main difference being that you must use a special container image from the toolbox project. Without this specific image Fedora will recognize the container a normal podman container.
+
+Another thing to keep in mind, is the easier integration with the host system. You may not need to load the container up with a lot of packages if the host system already has them installed.
+** Naming Images
+*** distro-noun/verb
+** All Tools
+#+begin_src containerfile :tangle ~/Projects/infosec_containers/toolbox/Containerfile
+# Start from the official Fedora Toolbox Image
+FROM registry.fedoraproject.org/fedora-toolbox:42
+
+# Add Microsoft Powershell Repo
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+    curl -s https://packages.microsoft.com/config/rhel/9/prod.repo | tee /etc/yum.repos.d/microsoft.repo
+
+# Install All Tools
+RUN dnf --assumeyes install \
+    nmap \
+    telnet \
+    wireshark-cli \
+    powershell \
+    nc \
+    bind-utils \
+    yara && \
+    dnf clean all
+
+RUN dnf clean all
+
+# Ensure the image is recognized by Toolbx
+LABEL com.github.containers.toolbox="true"
+#+end_src
+** Minimal Tools
