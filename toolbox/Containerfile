@@ -13,6 +13,8 @@ RUN dnf --assumeyes install \
     powershell \
     nc \
     bind-utils \
+    bat \
+    navi \
     yara && \
     dnf clean all
 

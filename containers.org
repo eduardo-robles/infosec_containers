@@ -125,6 +125,18 @@ podman run --rm -it --name malcont ma-fedora /usr/bin/emacs
 To build a toolbox image you use a very similar process as with a regular podman image container. The main difference being that you must use a special container image from the toolbox project. Without this specific image Fedora will recognize the container a normal podman container.
 
 Another thing to keep in mind, is the easier integration with the host system. You may not need to load the container up with a lot of packages if the host system already has them installed.
+** Image/Containers Life-cycle
+Here's a breakdown of how you should manage the images and containers. Every so often you will add or remove a package or configuration. Doing so will require you to stop, remove, build, create, and enter a toolbox container.
+#+begin_src sh
+  - podman build --squash --tag localhost/sec-tools . #In the directory where the Containerfile exist use this build command to create the image
+  - podman images  #List all Podman Images
+  - podman stop sec-tools #Stop the 'sec-tools' container (not image)
+  - podman rm sec-tools #Remove the 'sec-tools' image (can't run container without the image)
+  - toolbox list #Check if correct podman container was stopped and correct image was removedness
+  - toolbox create sec-tools --image localhost/sec-tools:latest #Use toolbox to create the container from the image you built earlier
+  - toolbox enter sec-tools #Enter the toolbox container you just created
+#+end_src
+
 ** Naming Images
 *** distro-noun/verb
 ** All Tools
@@ -144,6 +156,8 @@ RUN dnf --assumeyes install \
     powershell \
     nc \
     bind-utils \
+    bat \
+    navi \
     yara && \
     dnf clean all
 
